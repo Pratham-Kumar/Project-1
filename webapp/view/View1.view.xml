@@ -1,0 +1,131 @@
+<mvc:View
+    controllerName="com.sap.project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <IconTabBar id="idTopLevelIconTabBar">
+                <items>
+                    <IconTabFilter
+                        id="start"
+                        text="{i18n>gettingStartedFilter}"
+                    />
+                    <IconTabFilter
+                        id="layouts"
+                        text="{i18n>layoutFilter}"
+                    >
+                        <MessageStrip
+                            type="Information"
+                            showIcon="true"
+                            text="Here's a Form Layout inside an Icon Tab Bar …"
+                        />
+                        <f:SimpleForm
+                            id="simpleFormChange"
+                            title="Address"
+                            editable="true"
+                            class="editableForm"
+                        >
+                            <f:content>
+                                <Label text="{i18n>layoutFormName}" />
+                                <Input value="{address>/Name}" />
+                                <Label text="{i18n>layoutFormStreet}" />
+                                <Input value="{address>/Street}" />
+                                <Label text="{i18n>layoutFormHouseNumber}" />
+                                <Input value="{address>/HouseNumber}" />
+                                <Label text="{i18n>layoutFormZIPCode}" />
+                                <Input value="{address>/ZIPCode}" />
+                                <Label text="{i18n>layoutFormCity}" />
+                                <Input value="{address>/City}" />
+                                <Label text="{i18n>layoutFormCountry}" />
+                                <Select>
+                                    <items>
+                                        <core:Item
+                                            text="{i18n>layoutCountryGermany}"
+                                        />
+                                        <core:Item
+                                            text="{i18n>layoutCountryUSA}"
+                                        />
+                                        <core:Item
+                                            text="{i18n>layoutCountryEngland}"
+                                        />
+                                        <core:Item
+                                            text="{i18n>layoutCountryIndia}"
+                                        />
+                                    </items>
+                                </Select>
+                            </f:content>
+                        </f:SimpleForm>
+                        <Toolbar>
+                            <ToolbarSpacer />
+                            <Button
+                                text="{i18n>layoutPublishButton}"
+                                type="Accept"
+                                icon="sap-icon://outbox"
+                            />
+                            <Button
+                                text="{i18n>layoutDraftButton}"
+                                icon="sap-icon://Save"
+                            />
+                        </Toolbar>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        text="{i18n>dataBindingFilter}"
+                        key="db"
+                    >
+                        <content>
+                            <List
+                                id="productsList"
+                                items="{
+                                path : '/ProductSet',
+                                sorter : {
+                                path : 'Category',
+                                group : true
+                               }
+                            }"
+                            >
+                                <headerToolbar>
+                                    <Toolbar>
+                                        <Title text="{i18n>productListTitle}" />
+                                        <ToolbarSpacer />
+                                        <SearchField
+                                            width="50%"
+                                            search="onFilterProducts"
+                                        />
+                                    </Toolbar>
+                                </headerToolbar>
+                                <items>
+                                    <ObjectListItem
+                                        title="{Name}"
+                                        number="{Price}"
+                                        numberState="{= ${Price} > 500 ? 'Error' : 'Success'}"
+                                        intro="{ProductID}"
+                                    >
+                                        <firstStatus>
+                                            <ObjectStatus
+                                                text="{
+                                                parts: [
+                                                {path: 'WeightUnit'},
+                                                {path: 'WeightMeasure'}
+                                              ],
+                                                formatter : '.formatter.delivery'
+                                              }"
+                                            />
+                                        </firstStatus>
+                                    </ObjectListItem>
+                                </items>
+                            </List>
+                        </content>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>
